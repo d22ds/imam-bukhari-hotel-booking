@@ -1,24 +1,37 @@
-# Imam Bukhari Grand Hotel — Booking System
+# Imam Bukhari Grand Hotel — Booking Website
 
-Multilingual hotel reservation website (Uzbek, Russian, English) with instant booking and Telegram administrator notifications.
+A responsive, trilingual (Uzbek, Russian, English) starter website for Imam Bukhari Grand Hotel.
 
-## Planned stack
-- Next.js + TypeScript
-- PostgreSQL database with Prisma
-- Server-side reservation validation and transaction-safe room inventory
-- Telegram Bot API notifications
+## Included in this first version
 
-## Languages
-- `uz` — O‘zbekcha
-- `ru` — Русский
-- `en` — English
+- Responsive hotel landing page
+- Uzbek, Russian and English language switcher
+- Booking request form (arrival/departure, guest count, room type, name and phone)
+- Telegram share hand-off for the prepared request
+- Contact number: +998 55 705 01 22
 
-## Setup
-1. Copy `.env.example` to `.env` and fill in the values.
-2. Install dependencies with `npm install`.
-3. Run database migrations with `npx prisma migrate dev`.
-4. Start the development server with `npm run dev`.
+## Run locally
 
-Never commit real credentials. Configure production secrets in your hosting provider.
+1. Install Node.js (LTS).
+2. Clone this repository.
+3. Run `npm install`.
+4. Run `npm run dev`.
+5. Open http://localhost:3000.
 
-> This repository is an initial scaffold. Do not accept live guest reservations until database credentials, room inventory, rates, deployment, and Telegram credentials have been configured and tested.
+## Important: prototype, not live reservations yet
+
+The current form prepares a booking request and opens Telegram's share flow. It does **not** yet check room availability, save reservations, prevent double-booking, or send a notification automatically to the hotel's administrator.
+
+Before accepting real reservations, we must add a PostgreSQL database, room inventory and rate management, server-side transactional availability checks, and a Telegram bot connected to the administrator's chat. The room prices and inventory are intentionally not assumed.
+
+## Environment variables
+
+See `.env.example`. Never commit real Telegram tokens or database passwords. Store production credentials in the hosting provider's secret settings.
+
+## Planned next steps
+
+1. Confirm room categories, quantities, occupancy and current rates.
+2. Implement the reservation API and PostgreSQL schema with double-booking protection.
+3. Connect Telegram Bot API notifications to the hotel administrator.
+4. Add an admin interface to manage rooms, prices and reservations.
+5. Deploy and test the full flow before publishing the booking link.
