@@ -10,7 +10,7 @@ const copy = {
     eyebrow: "SAMARQAND · IMOM BUXORIY MAJMUASI YONIDA",
     title: "Samimiy mehmondo‘stlik, xotirjam hordiq.",
     intro: "Imom Buxoriy ziyoratiga yaqin, qulay va shinam xonalarda dam oling.",
-    booking: "Xonani band qilish", checkin: "Kelish sanasi", checkout: "Ketish sanasi",
+    priceNote: "Xorijiy fuqarolar uchun xona narxiga 200 000 so‘m qo‘shiladi.", booking: "Xonani band qilish", checkin: "Kelish sanasi", checkout: "Ketish sanasi",
     guests: "Mehmonlar", name: "Ism-familiya", phone: "Telefon raqami",
     room: "Xona turi", standard: "Standart — 2 kishilik", family: "Family — 4 kishilik",
     send: "Band qilish so‘rovini yuborish", note: "So‘rov yuborilgach, mehmonxona ma’muriyati siz bilan bog‘lanadi.",
@@ -24,7 +24,7 @@ const copy = {
     eyebrow: "САМАРКАНД · РЯДОМ С КОМПЛЕКСОМ ИМАМА БУХАРИ",
     title: "Тёплое гостеприимство и спокойный отдых.",
     intro: "Остановитесь в уютном отеле рядом с местом паломничества Имама Бухари.",
-    booking: "Забронировать номер", checkin: "Дата заезда", checkout: "Дата выезда",
+    priceNote: "Для иностранных граждан к стоимости номера добавляется 200 000 сумов.", booking: "Забронировать номер", checkin: "Дата заезда", checkout: "Дата выезда",
     guests: "Гостей", name: "Имя и фамилия", phone: "Номер телефона",
     room: "Тип номера", standard: "Стандарт — 2 места", family: "Family — 4 места",
     send: "Отправить заявку", note: "После отправки заявки администрация отеля свяжется с вами.",
@@ -38,7 +38,7 @@ const copy = {
     eyebrow: "SAMARKAND · NEXT TO THE IMAM BUKHARI COMPLEX",
     title: "Warm hospitality. A peaceful stay.",
     intro: "Enjoy a comfortable stay close to the Imam Bukhari pilgrimage complex.",
-    booking: "Book a room", checkin: "Check-in", checkout: "Check-out",
+    priceNote: "An additional UZS 200,000 is added to the room rate for foreign guests.", booking: "Book a room", checkin: "Check-in", checkout: "Check-out",
     guests: "Guests", name: "Full name", phone: "Phone number",
     room: "Room type", standard: "Standard — 2 guests", family: "Family — 4 guests",
     send: "Send booking request", note: "Our hotel team will contact you after receiving your request.",
@@ -101,6 +101,15 @@ export default function Home() {
         {t.features.map((feature) => <div className="feature" key={feature}><CheckCircle2 size={19}/>{feature}</div>)}
       </section>
 
+
+      <section className="complex-showcase">
+        <div className="complex-photo" role="img" aria-label="Imom Buxoriy majmuasi"/>
+        <div className="complex-copy">
+          <p className="eyebrow dark">SAMARQANDNING MUBORAK MASKANI</p>
+          <h2>{lang === "uz" ? "Imom Buxoriy majmuasi — mehmonxonamiz yaqinida" : lang === "ru" ? "Комплекс Имама Бухари — рядом с нашим отелем" : "The Imam Bukhari Complex — close to our hotel"}</h2>
+          <p>{lang === "uz" ? "Ziyoratingiz va hordig'ingiz uchun qulay joylashuv." : lang === "ru" ? "Удобное расположение для паломничества и отдыха." : "A convenient location for your pilgrimage and stay."}</p>
+        </div>
+      </section>
       <section className="booking-section" id="booking">
         <div className="booking-copy">
           <p className="eyebrow dark">IMAM BUKHARI GRAND HOTEL</p>
@@ -115,7 +124,7 @@ export default function Home() {
             <label>{t.checkin}<input type="date" min={new Date().toISOString().slice(0,10)} value={form.arrival} onChange={e=>setForm({...form,arrival:e.target.value})} required/></label>
             <label>{t.checkout}<input type="date" min={form.arrival || new Date().toISOString().slice(0,10)} value={form.departure} onChange={e=>setForm({...form,departure:e.target.value})} required/></label>
             <label>{t.guests}<span className="input-icon"><Users size={16}/><select value={form.guests} onChange={e=>setForm({...form,guests:e.target.value})}>{Array.from({length:maxGuests},(_,i)=><option key={i+1}>{i+1}</option>)}</select></span></label>
-            <label>{t.room}<select value={form.room} onChange={e=>setForm({...form,room:e.target.value,guests:e.target.value==="family"?"4":"2"})}><option value="standard">{t.standard}</option><option value="family">{t.family}</option></select></label>
+            <label>{t.room}<select value={form.room} onChange={e=>setForm({...form,room:e.target.value,guests:e.target.value==="family"?"4":"2"})}><option value="standard">{t.standard}</option><option value="family">{t.family}</option></select><small className="price-note">{t.priceNote}</small></label>
             <label className="full">{t.name}<input value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required/></label>
             <label className="full">{t.phone}<input type="tel" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} placeholder="+998" required/></label>
           </div>
